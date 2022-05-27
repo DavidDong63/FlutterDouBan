@@ -40,9 +40,9 @@ class _WebViewPageWidgetState extends State<WebViewPageWidget>
     with SingleTickerProviderStateMixin {
   var list = ['豆芽豆品', '豆芽时间'];
   int selectIndex = 0;
-  Color selectColor, unselectColor;
-  TextStyle selectStyle, unselectedStyle;
-  TabController tabController;
+  Color? selectColor, unselectColor;
+  TextStyle? selectStyle, unselectedStyle;
+  TabController? tabController;
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _WebViewPageWidgetState extends State<WebViewPageWidget>
   void dispose() {
     super.dispose();
     print('_ShopPageWidgetState dispose');
-    tabController.dispose();
+    tabController?.dispose();
     _webviewReference.close();
     _webviewReference.dispose();
   }
@@ -129,14 +129,14 @@ class _WebViewPageWidgetState extends State<WebViewPageWidget>
 class _WebViewWidget extends StatefulWidget {
   final String url;
 
-  _WebViewWidget(this.url, {Key key}) : super(key: key);
+  _WebViewWidget(this.url, {Key? key}) : super(key: key);
 
   @override
   _WebViewWidgetState createState() => _WebViewWidgetState();
 }
 
 class _WebViewWidgetState extends State<_WebViewWidget>  {
-  Rect _rect;
+  Rect? _rect;
   bool needFullScreen = false;
   @override
   void initState() {
@@ -188,9 +188,9 @@ class _WebViewWidgetState extends State<_WebViewWidget>  {
 
 class _WebviewPlaceholder extends SingleChildRenderObjectWidget {
   const _WebviewPlaceholder({
-    Key key,
-    @required this.onRectChanged,
-    Widget child,
+    Key? key,
+    required this.onRectChanged,
+    Widget? child,
   }) : super(key: key, child: child);
 
   final ValueChanged<Rect> onRectChanged;
@@ -211,15 +211,15 @@ class _WebviewPlaceholder extends SingleChildRenderObjectWidget {
 
 class _WebviewPlaceholderRender extends RenderProxyBox {
   _WebviewPlaceholderRender({
-    RenderBox child,
-    ValueChanged<Rect> onRectChanged,
+    RenderBox? child,
+    required ValueChanged<Rect> onRectChanged,
   })  : _callback = onRectChanged,
         super(child);
 
   ValueChanged<Rect> _callback;
-  Rect _rect;
+  Rect? _rect;
 
-  Rect get rect => _rect;
+  Rect? get rect => _rect;
 
   set onRectChanged(ValueChanged<Rect> callback) {
     if (callback != _callback) {
@@ -229,8 +229,8 @@ class _WebviewPlaceholderRender extends RenderProxyBox {
   }
 
   void notifyRect() {
-    if (_callback != null && _rect != null) {
-      _callback(_rect);
+    if (_rect != null) {
+      _callback(_rect!);
     }
   }
 

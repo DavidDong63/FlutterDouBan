@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoadingWidget {
-  static Widget getLoading({Color backgroundColor, Color loadingBgColor}) {
+  static Widget getLoading({Color? backgroundColor, Color? loadingBgColor}) {
     return Container(
       alignment: AlignmentDirectional.center,
       decoration: new BoxDecoration(

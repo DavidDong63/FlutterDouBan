@@ -108,7 +108,7 @@ class PersonCenterPage extends StatelessWidget {
   }
 
   SliverToBoxAdapter _personItem(String imgAsset, String title,
-      {VoidCallback onTab}) {
+      {VoidCallback? onTab}) {
     return SliverToBoxAdapter(
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
@@ -292,12 +292,12 @@ class _TabBarWidget extends StatefulWidget {
   State<StatefulWidget> createState() => _TabBarWidgetState();
 }
 
-TabController _tabController;
+TabController? _tabController;
 
 class _TabBarWidgetState extends State<_TabBarWidget> {
-  Color selectColor, unselectedColor;
-  TextStyle selectStyle, unselectedStyle;
-  List<Widget> tabWidgets;
+  Color? selectColor, unselectedColor;
+  TextStyle? selectStyle, unselectedStyle;
+  List<Widget>? tabWidgets;
 
   @override
   void initState() {
@@ -319,14 +319,14 @@ class _TabBarWidgetState extends State<_TabBarWidget> {
   void dispose() {
     super.dispose();
     if (_tabController != null) {
-      _tabController.dispose();
+      _tabController?.dispose();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return TabBar(
-      tabs: tabWidgets,
+      tabs: tabWidgets!,
       isScrollable: true,
       indicatorColor: selectColor,
       labelColor: selectColor,

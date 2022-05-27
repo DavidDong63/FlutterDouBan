@@ -9,7 +9,7 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 class LongCommentWidget extends StatelessWidget {
   final MovieLongCommentsEntity movieLongCommentsEntity;
 
-  LongCommentWidget({Key key, @required this.movieLongCommentsEntity})
+  LongCommentWidget({Key? key, required this.movieLongCommentsEntity})
       : assert(movieLongCommentsEntity != null),
         super(key: key);
 
@@ -24,7 +24,7 @@ class LongCommentWidget extends StatelessWidget {
 class LongCommentTabView extends StatefulWidget {
   final MovieLongCommentsEntity movieLongCommentsEntity;
 
-  LongCommentTabView({Key key, @required this.movieLongCommentsEntity})
+  LongCommentTabView({Key? key, required this.movieLongCommentsEntity})
       : super(key: key);
 
   @override
@@ -35,9 +35,9 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
     with SingleTickerProviderStateMixin {
   final List<String> list = ['影评', '话题', '讨论'];
 
-  TabController controller;
-  Color selectColor, unselectedColor;
-  TextStyle selectStyle, unselectedStyle;
+  TabController? controller;
+  Color? selectColor, unselectedColor;
+  TextStyle? selectStyle, unselectedStyle;
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
 
   @override
   void dispose() {
-    controller.dispose();
+    controller?.dispose();
     super.dispose();
   }
 

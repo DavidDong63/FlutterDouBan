@@ -97,7 +97,7 @@ DefaultTabController getWidget() {
 class SliverContainer extends StatefulWidget {
   final String name;
 
-  SliverContainer({Key key, @required this.name}) : super(key: key);
+  SliverContainer({Key? key, required this.name}) : super(key: key);
 
   @override
   _SliverContainerState createState() => _SliverContainerState();
@@ -110,7 +110,7 @@ class _SliverContainerState extends State<SliverContainer> {
     print('init state${widget.name}');
 
     ///请求动态数据
-    if (list == null || list.isEmpty) {
+    if (list == null || list!.isEmpty) {
       if (_tabs[0] == widget.name) {
         requestAPI();
       } else {
@@ -120,7 +120,7 @@ class _SliverContainerState extends State<SliverContainer> {
     }
   }
 
-  List<Subject> list;
+  List<Subject>? list;
 
   void requestAPI() async {
 //    var _request = HttpRequest(API.BASE_URL);
@@ -137,7 +137,7 @@ class _SliverContainerState extends State<SliverContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return getContentSliver(context, list);
+    return getContentSliver(context, list!);
   }
 
   getContentSliver(BuildContext context, List<Subject> list) {
@@ -146,7 +146,7 @@ class _SliverContainerState extends State<SliverContainer> {
     }
 
     print('getContentSliver');
-    if (list == null || list.length == 0) {
+    if (list.length == 0) {
       return Text('暂无数据');
     }
     return SafeArea(

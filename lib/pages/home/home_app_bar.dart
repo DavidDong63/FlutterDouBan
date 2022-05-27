@@ -132,7 +132,7 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   ///
   /// Typically used in the [Scaffold.appBar] property.
   AppBar({
-    Key key,
+    Key? key,
     this.leading,
     this.automaticallyImplyLeading = true,
     this.title,
@@ -156,7 +156,7 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
         assert(toolbarOpacity != null),
         assert(bottomOpacity != null),
         preferredSize =
-            Size.fromHeight(1.0 + (bottom?.preferredSize?.height ?? 0.0)),
+            Size.fromHeight(1.0 + (bottom?.preferredSize.height ?? 0.0)),
         super(key: key);
 
   /// A widget to display before the [title].
@@ -198,20 +198,20 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   ///
   ///  * [Scaffold.appBar], in which an [AppBar] is usually placed.
   ///  * [Scaffold.drawer], in which the [Drawer] is usually placed.
-  final Widget leading;
+  final Widget? leading;
 
   /// Controls whether we should try to imply the leading widget if null.
   ///
   /// If true and [leading] is null, automatically try to deduce what the leading
   /// widget should be. If false and [leading] is null, leading space is given to [title].
   /// If leading widget is not null, this parameter has no effect.
-  final bool automaticallyImplyLeading;
+  final bool? automaticallyImplyLeading;
 
   /// The primary widget displayed in the appbar.
   ///
   /// Typically a [Text] widget containing a description of the current contents
   /// of the app.
-  final Widget title;
+  final Widget? title;
 
   /// Widgets to display after the [title] widget.
   ///
@@ -240,7 +240,7 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   /// )
   /// ```
   /// {@end-tool}
-  final List<Widget> actions;
+  final List<Widget>? actions;
 
   /// This widget is stacked behind the toolbar and the tabbar. It's height will
   /// be the same as the app bar's overall height.
@@ -250,7 +250,7 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   /// changes the [AppBar]'s height when scrolled.
   ///
   /// Typically a [FlexibleSpaceBar]. See [FlexibleSpaceBar] for details.
-  final Widget flexibleSpace;
+  final Widget? flexibleSpace;
 
   /// This widget appears across the bottom of the app bar.
   ///
@@ -260,7 +260,7 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   /// See also:
   ///
   ///  * [PreferredSize], which can be used to give an arbitrary widget a preferred size.
-  PreferredSizeWidget bottom;
+  PreferredSizeWidget? bottom;
 
   /// The z-coordinate at which to place this app bar relative to its parent.
   ///
@@ -271,35 +271,35 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   /// If this property is null then [ThemeData.appBarTheme.elevation] is used,
   /// if that is also null, the default value is 4, the appropriate elevation
   /// for app bars.
-  final double elevation;
+  final double? elevation;
 
   /// The color to use for the app bar's material. Typically this should be set
   /// along with [brightness], [iconTheme], [textTheme].
   ///
   /// If this property is null then [ThemeData.appBarTheme.color] is used,
   /// if that is also null then [ThemeData.primaryColor] is used.
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// The brightness of the app bar's material. Typically this is set along
   /// with [backgroundColor], [iconTheme], [textTheme].
   ///
   /// If this property is null then [ThemeData.appBarTheme.brightness] is used,
   /// if that is also null then [ThemeData.primaryColorBrightness] is used.
-  final Brightness brightness;
+  final Brightness? brightness;
 
   /// The color, opacity, and size to use for app bar icons. Typically this
   /// is set along with [backgroundColor], [brightness], [textTheme].
   ///
   /// If this property is null then [ThemeData.appBarTheme.iconTheme] is used,
   /// if that is also null then [ThemeData.primaryIconTheme] is used.
-  final IconThemeData iconTheme;
+  final IconThemeData? iconTheme;
 
   /// The typographic styles to use for text in the app bar. Typically this is
   /// set along with [brightness] [backgroundColor], [iconTheme].
   ///
   /// If this property is null then [ThemeData.appBarTheme.textTheme] is used,
   /// if that is also null then [ThemeData.primaryTextTheme] is used.
-  final TextTheme textTheme;
+  final TextTheme? textTheme;
 
   /// Whether this app bar is being displayed at the top of the screen.
   ///
@@ -311,14 +311,14 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   /// Whether the title should be centered.
   ///
   /// Defaults to being adapted to the current [TargetPlatform].
-  final bool centerTitle;
+  final bool? centerTitle;
 
   /// The spacing around [title] content on the horizontal axis. This spacing is
   /// applied even if there is no [leading] content or [actions]. If you want
   /// [title] to take all the space available, set this value to 0.0.
   ///
   /// Defaults to [NavigationToolbar.kMiddleSpacing].
-  final double titleSpacing;
+  final double? titleSpacing;
 
   /// How opaque the toolbar part of the app bar is.
   ///
@@ -336,7 +336,7 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   /// Typically, this value is not changed from its default value (1.0). It is
   /// used by [SliverAppBar] to animate the opacity of the toolbar when the app
   /// bar is scrolled.
-  final double bottomOpacity;
+  final double? bottomOpacity;
 
   /// A size whose height is the sum of [kToolbarHeight] and the [bottom] widget's
   /// preferred height.
@@ -367,21 +367,21 @@ class _AppBarState extends State<AppBar> {
     final ThemeData themeData = Theme.of(context);
     final AppBarTheme appBarTheme = AppBarTheme.of(context);
     final ScaffoldState scaffold = Scaffold.of(context);
-    final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
+    final ModalRoute<Object?>? parentRoute = ModalRoute.of(context);
 
-    final bool hasDrawer = scaffold?.hasDrawer ?? false;
-    final bool hasEndDrawer = scaffold?.hasEndDrawer ?? false;
+    final bool hasDrawer = scaffold.hasDrawer ?? false;
+    final bool hasEndDrawer = scaffold.hasEndDrawer ?? false;
     final bool canPop = parentRoute?.canPop ?? false;
     final bool useCloseButton =
         parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
 
     IconThemeData appBarIconTheme =
         widget.iconTheme ?? appBarTheme.iconTheme ?? themeData.primaryIconTheme;
-    TextStyle centerStyle = widget.textTheme?.bodyText1 ??
-        appBarTheme.textTheme?.bodyText1 ??
+    TextStyle? centerStyle = widget.textTheme?.bodyText1 ??
+        appBarTheme. titleTextStyle ??
         themeData.primaryTextTheme.bodyText1;
-    TextStyle sideStyle = widget.textTheme?.bodyText1 ??
-        appBarTheme.textTheme?.bodyText1 ??
+    TextStyle? sideStyle = widget.textTheme?.bodyText1 ??
+        appBarTheme.titleTextStyle ??
         themeData.primaryTextTheme.bodyText1;
 
     if (widget.toolbarOpacity != 1.0) {
@@ -1098,7 +1098,6 @@ class _SliverAppBarState extends State<SliverAppBar>
   void _updateSnapConfiguration() {
     if (widget.snap && widget.floating) {
       _snapConfiguration = FloatingHeaderSnapConfiguration(
-        vsync: this,
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 200),
       );

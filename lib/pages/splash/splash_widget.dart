@@ -116,7 +116,7 @@ class _SplashWidgetState extends State<SplashWidget> {
 class CountDownWidget extends StatefulWidget {
   final onCountDownFinishCallBack;
 
-  CountDownWidget({Key key, @required this.onCountDownFinishCallBack})
+  CountDownWidget({Key? key, required this.onCountDownFinishCallBack})
       : super(key: key);
 
   @override
@@ -125,7 +125,7 @@ class CountDownWidget extends StatefulWidget {
 
 class _CountDownWidgetState extends State<CountDownWidget> {
   var _seconds = 6;
-  Timer _timer;
+  Timer? _timer;
 
   @override
   void initState() {

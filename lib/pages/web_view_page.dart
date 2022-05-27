@@ -6,7 +6,7 @@ class WebViewPage extends StatelessWidget {
   final dynamic params;
   static final String TITLE = 'title';
 
-  WebViewPage(this.url, {Key key, this.params}) : super(key: key);
+  WebViewPage(this.url, {Key? key, this.params}) : super(key: key);
 //  final _webviewReference = FlutterWebviewPlugin();
   @override
   Widget build(BuildContext context) {

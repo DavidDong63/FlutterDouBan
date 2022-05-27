@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:doubanapp/pages/group/group_page.dart';
-import 'package:doubanapp/pages/movie/book_audio_video_page.dart';
 import 'package:doubanapp/pages/home/home_page.dart';
+import 'package:doubanapp/pages/movie/book_audio_video_page.dart';
 import 'package:doubanapp/pages/person/person_center_page.dart';
 import 'package:doubanapp/pages/shop_page.dart';
-
+import 'package:flutter/material.dart';
 
 ///这个页面是作为整个APP的最外层的容器，以Tab为基础控制每个item的显示与隐藏
 class ContainerPage extends StatefulWidget {
-  ContainerPage({Key key}) : super(key: key);
+  ContainerPage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -23,8 +22,8 @@ class _Item {
 }
 
 class _ContainerPageState extends State<ContainerPage> {
-  final ShopPageWidget shopPageWidget  = ShopPageWidget();
-  List<Widget> pages;
+  final ShopPageWidget shopPageWidget = ShopPageWidget();
+  List<Widget>? pages;
 
   final defaultItemColor = Color.fromARGB(255, 125, 125, 125);
 
@@ -41,13 +40,13 @@ class _ContainerPageState extends State<ContainerPage> {
         'assets/images/ic_tab_profile_normal.png')
   ];
 
-  List<BottomNavigationBarItem> itemList;
+  List<BottomNavigationBarItem>? itemList;
 
   @override
   void initState() {
     super.initState();
     print('initState _ContainerPageState');
-    if(pages == null){
+    if (pages == null) {
       pages = [
         HomePage(),
         BookAudioVideoPage(),
@@ -56,25 +55,20 @@ class _ContainerPageState extends State<ContainerPage> {
         PersonCenterPage()
       ];
     }
-    if(itemList == null){
+    if (itemList == null) {
       itemList = itemNames
           .map((item) => BottomNavigationBarItem(
-          icon: Image.asset(
-            item.normalIcon,
-            width: 30.0,
-            height: 30.0,
-          ),
-          title: Text(
-            item.name,
-            style: TextStyle(fontSize: 10.0),
-          ),
-          activeIcon:
-          Image.asset(item.activeIcon, width: 30.0, height: 30.0)))
+              icon: Image.asset(
+                item.normalIcon,
+                width: 30.0,
+                height: 30.0,
+              ),
+              label: item.name,
+              activeIcon:
+                  Image.asset(item.activeIcon, width: 30.0, height: 30.0)))
           .toList();
     }
-
   }
-
 
   int _selectIndex = 0;
 
@@ -84,11 +78,10 @@ class _ContainerPageState extends State<ContainerPage> {
       offstage: _selectIndex != index,
       child: TickerMode(
         enabled: _selectIndex == index,
-        child: pages[index],
+        child: pages![index],
       ),
     );
   }
-
 
   @override
   void didUpdateWidget(ContainerPage oldWidget) {
@@ -132,13 +125,14 @@ class _ContainerPageState extends State<ContainerPage> {
 //    this.backgroundColor,
       backgroundColor: Color.fromARGB(255, 248, 248, 248),
       bottomNavigationBar: BottomNavigationBar(
-        items: itemList,
+        items: itemList!,
         onTap: (int index) {
           ///这里根据点击的index来显示，非index的page均隐藏
           setState(() {
             _selectIndex = index;
             //这个是用来控制比较特别的shopPage中WebView不能动态隐藏的问题
-            shopPageWidget.setShowState(pages.indexOf(shopPageWidget) == _selectIndex);
+            shopPageWidget
+                .setShowState(pages?.indexOf(shopPageWidget) == _selectIndex);
           });
         },
         //图标大小

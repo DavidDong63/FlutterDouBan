@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:doubanapp/widgets/bottom_drag_widget.dart';
-import 'package:doubanapp/pages/splash/splash_widget.dart';
+
+import 'pages/splash/splash_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,14 +36,13 @@ class MyApp extends StatelessWidget {
 class RestartWidget extends StatefulWidget {
   final Widget child;
 
-  RestartWidget({Key key, @required this.child})
-      : assert(child != null),
-        super(key: key);
+  RestartWidget({Key? key, required this.child})
+      : super(key: key);
 
   static restartApp(BuildContext context) {
-    final _RestartWidgetState state =
+    final _RestartWidgetState? state =
         context.findAncestorStateOfType<_RestartWidgetState>();
-    state.restartApp();
+    state?.restartApp();
   }
 
   @override

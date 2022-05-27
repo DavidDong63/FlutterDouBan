@@ -5,7 +5,7 @@ import 'package:doubanapp/pages/movie/movie_page.dart';
 class FlutterTabBarView extends StatelessWidget {
   final TabController tabController;
 
-  FlutterTabBarView({Key key, @required this.tabController}) : super(key: key);
+  FlutterTabBarView({Key? key, required this.tabController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

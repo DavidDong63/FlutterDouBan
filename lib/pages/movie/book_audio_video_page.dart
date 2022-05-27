@@ -7,7 +7,7 @@ import 'package:doubanapp/router.dart';
 
 var titleList = ['电影', '电视', '综艺', '读书', '音乐', '同城'];
 
-List<Widget> tabList;
+List<Widget>? tabList;
 
 ///书影音
 ///包含了'电影', '电视', '综艺', '读书', '音乐', '同城' item Widget
@@ -20,7 +20,7 @@ class BookAudioVideoPage extends StatefulWidget {
   }
 }
 
-TabController _tabController;
+TabController? _tabController;
 
 class _BookAudioVideoPageState extends State<BookAudioVideoPage>
     with SingleTickerProviderStateMixin {
@@ -31,7 +31,7 @@ class _BookAudioVideoPageState extends State<BookAudioVideoPage>
     super.initState();
     tabBar = HomePageTabBar();
     tabList = getTabList();
-    _tabController = TabController(vsync: this, length: tabList.length);
+    _tabController = TabController(vsync: this, length: tabList!.length);
   }
 
   List<Widget> getTabList() {
@@ -84,12 +84,12 @@ Widget _getNestedScrollView(Widget tabBar) {
         ];
       },
       body: FlutterTabBarView(
-        tabController: _tabController,
+        tabController: _tabController!,
       ));
 }
 
 class HomePageTabBar extends StatefulWidget {
-  HomePageTabBar({Key key}) : super(key: key);
+  HomePageTabBar({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -99,9 +99,9 @@ class HomePageTabBar extends StatefulWidget {
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate({
-    @required this.minHeight,
-    @required this.maxHeight,
-    @required this.child,
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
   });
 
   final double minHeight;
@@ -129,8 +129,8 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class _HomePageTabBarState extends State<HomePageTabBar> {
-  Color selectColor, unselectedColor;
-  TextStyle selectStyle, unselectedStyle;
+  Color? selectColor, unselectedColor;
+  TextStyle? selectStyle, unselectedStyle;
 
   @override
   void initState() {
@@ -143,7 +143,7 @@ class _HomePageTabBarState extends State<HomePageTabBar> {
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController?.dispose();
     super.dispose();
   }
 
@@ -172,7 +172,7 @@ class _HomePageTabBarState extends State<HomePageTabBar> {
     return Container(
       margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: TabBar(
-        tabs: tabList,
+        tabs: tabList!,
         isScrollable: true,
         controller: _tabController,
         indicatorColor: selectColor,
